@@ -1,26 +1,50 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../store/slices/authSlice';
-import { RootState, AppDispatch } from '../store'; // ✅ AppDispatch included
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// Instead of default import, try named:
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import FeedScreen from './FeedScreen';
+import ConnectionsScreen from './ConnectionsScreen';
+import MessagesScreen from './MessagesScreen'; // create dummy
+import NotificationsScreen from './NotificationsScreen'; // create dummy
+
+const Tab = createBottomTabNavigator();
 
 export default function DashboardScreen() {
-  const dispatch = useDispatch<AppDispatch>(); // ✅ tells TS to allow thunk
-  const user = useSelector((state: RootState) => state.auth.user);
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-  };
-
+  console.log('MessagesScreen is:', typeof MessagesScreen);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>🎉 Welcome, {user?.name || 'User'}!</Text>
-      <Button title="Logout" onPress={handleLogout} />
-    </View>
-  );
-}
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarIcon: ({ color, size }) => {
+          let iconName: string = 'home';
 
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  title: { fontSize: 18, marginBottom: 20 },
-});
+          switch (route.name) {
+            case 'Feed':
+              iconName = 'home';
+              break;
+            case 'Connections':
+              iconName = 'account-multiple';
+              break;
+            case 'Messages':
+              iconName = 'message-text';
+              break;
+            case 'Notifications':
+              iconName = 'bell';
+              break;
+          }
+
+          return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+       },
+        tabBarActiveTintColor: '#ff5858',
+        tabBarInactiveTintColor: 'gray',
+      })}
+    >
+      <Tab.Screen name="Feed" component={FeedScreen} />
+      <Tab.Screen name="Connections" component={ConnectionsScreen} />
+      <Tab.Screen name="Messages" component={MessagesScreen} />
+      <Tab.Screen name="Notifications" component={NotificationsScreen} />
+    </Tab.Navigator>
+  );
+  
+}

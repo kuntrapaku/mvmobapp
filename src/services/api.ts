@@ -7,9 +7,9 @@ const API = axios.create({
   },
 });
 
-// 👇 Create a login API call using the instance
-export const loginApi = async (credentials: { email: string; password: string }) => {
-  return API.post('/auth/login', credentials); // Adjust endpoint if needed
+// ✅ FIXED: sending "username" as backend expects
+export const loginApi = async (credentials: { username: string; password: string }) => {
+  return API.post('/auth/login', credentials);
 };
 
 export default API;

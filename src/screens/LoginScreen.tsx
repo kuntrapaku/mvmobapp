@@ -25,7 +25,7 @@ export default function LoginScreen() {
       return;
     }
 
-    const result = await dispatch(loginUser({ email: username, password }));
+    const result = await dispatch(loginUser({ username, password }));
 
     if (loginUser.fulfilled.match(result)) {
       navigation.replace('Dashboard');
@@ -50,7 +50,6 @@ export default function LoginScreen() {
         style={styles.input}
         secureTextEntry
       />
-
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
