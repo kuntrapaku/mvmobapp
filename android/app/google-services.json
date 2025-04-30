@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "850414007036",
+    "project_id": "mymobapp-3d2d4",
+    "storage_bucket": "mymobapp-3d2d4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850414007036:android:cbef0ac177f2e333145d79",
+        "android_client_info": {
+          "package_name": "com.mvmobapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfd6OnLysiOsQcxUZOD4SFefgbmP2j8xM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

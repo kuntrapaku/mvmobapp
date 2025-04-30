@@ -7,4 +7,9 @@ export type RootStackParamList = {
   Connections: undefined;
   Messages: undefined;
   Notifications: undefined;
+  Chat: { recipientId: number; recipientName: string };
+  Search: undefined;
+  UserProfile: { user: { id: number; username: string; fullName: string; profilePictureUrl?: string; bio?: string; location?: string } };
+  Profile: { userId: number };
+
 };

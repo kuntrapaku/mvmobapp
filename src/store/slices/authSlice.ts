@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loginApi } from '../../services/api';
 import { AppDispatch } from '../store';
 
 type User = {
+  id?: number;
   name: string;
   email: string;
+  token: string;
 };
 
 type AuthState = {
@@ -19,15 +22,32 @@ const initialState: AuthState = {
   error: null,
 };
 
-// 🔄 loginUser expects username now
+// 🔐 Login Thunk
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (credentials: { username: string; password: string }, { rejectWithValue }) => {
     try {
-      const response = await loginApi(credentials); // API call sends { username, password }
+      const response = await loginApi(credentials);
+      await AsyncStorage.setItem('authToken', response.data.token); // store token
       return response.data;
     } catch (err: any) {
       return rejectWithValue(err.response?.data?.message || 'Login failed');
+    }
+  }
+);
+
+// 🔐 Logout Thunk (clears storage)
+export const logoutUser = createAsyncThunk(
+  'auth/logoutUser',
+  async (_, { dispatch }) => {
+    try {
+      await AsyncStorage.removeItem('authToken');
+      dispatch(logout());
+
+      // Optional: call logout API if needed
+      // await API.post('/auth/logout'); 
+    } catch (err) {
+      console.error('Logout failed:', err);
     }
   }
 );
@@ -60,9 +80,4 @@ const authSlice = createSlice({
 });
 
 export const { logout } = authSlice.actions;
-
-export const logoutUser = () => (dispatch: AppDispatch) => {
-  dispatch(logout());
-};
-
 export default authSlice.reducer;
