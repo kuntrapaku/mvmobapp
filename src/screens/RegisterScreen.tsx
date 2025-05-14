@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import api from '../services/api';
 import { useNavigation } from '@react-navigation/native';
+import GradientBackground from '../components/GradientBackground';
 
 export default function RegisterScreen() {
   const [username, setUsername] = useState('');
@@ -37,6 +38,7 @@ export default function RegisterScreen() {
   };
 
   return (
+    <GradientBackground>
     <View style={styles.container}>
       <TextInput
         placeholder="Username"
@@ -53,6 +55,7 @@ export default function RegisterScreen() {
       />
       <Button title="Register" onPress={handleRegister} />
     </View>
+    </GradientBackground>
   );
 }
 

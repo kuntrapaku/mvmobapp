@@ -42,10 +42,13 @@ export const logoutUser = createAsyncThunk(
   async (_, { dispatch }) => {
     try {
       await AsyncStorage.removeItem('authToken');
+
+      // Clear auth state
       dispatch(logout());
 
-      // Optional: call logout API if needed
-      // await API.post('/auth/logout'); 
+      // Clear connections state
+      dispatch({ type: 'connections/clearConnections' });
+
     } catch (err) {
       console.error('Logout failed:', err);
     }

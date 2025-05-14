@@ -5,6 +5,7 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
 import axios from 'axios';
 
+
 type ProfileRouteProp = RouteProp<RootStackParamList, 'Profile'>;
 
 export default function ProfileScreen() {

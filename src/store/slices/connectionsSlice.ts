@@ -34,6 +34,11 @@ const connectionsSlice = createSlice({
     declineConnection(state, action: PayloadAction<string>) {
       state.pending = state.pending.filter((u) => u.id !== action.payload);
     },
+    // NEW: Clear all connections
+    clearConnections(state) {
+      state.pending = [];
+      state.accepted = [];
+    },
   },
 });
 
@@ -41,6 +46,7 @@ export const {
   setPendingConnections,
   acceptConnection,
   declineConnection,
+  clearConnections,
 } = connectionsSlice.actions;
 
 export default connectionsSlice.reducer;

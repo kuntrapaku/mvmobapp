@@ -1,6 +1,9 @@
+import { UserDTO } from '../types';
+
 export type RootStackParamList = {
   Welcome: undefined;
   Login: undefined;
+  Register: undefined;
   Dashboard: undefined;
   CreateFrame: undefined;
   Feed: undefined;
@@ -9,7 +12,5 @@ export type RootStackParamList = {
   Notifications: undefined;
   Chat: { recipientId: number; recipientName: string };
   Search: undefined;
-  UserProfile: { user: { id: number; username: string; fullName: string; profilePictureUrl?: string; bio?: string; location?: string } };
-  Profile: { userId: number };
-
+  UserProfile: { user: UserDTO };
 };
