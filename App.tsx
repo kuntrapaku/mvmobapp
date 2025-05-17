@@ -5,10 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { store } from './src/store/store';
 import AppNavigator from './src/navigation/AppNavigator';
 import messaging from '@react-native-firebase/messaging';
-import { Alert, Platform, Button, View, Text } from 'react-native';
+import { Alert, Platform, Button, View, Text,TextInput } from 'react-native';
 
 export default function App() {
   const [response, setResponse] = useState('');
+  const [prompt, setPrompt] = useState('');
 
   useEffect(() => {
     // 🔥 Request permission for FCM Notifications
@@ -41,7 +42,7 @@ export default function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: 'Hello from mobile' }),
+        body: JSON.stringify({ prompt }),
       });
 
       const data = await res.text(); // Spring Boot might return plain text
@@ -58,8 +59,24 @@ export default function App() {
         <AppNavigator />
         {/* 🧪 Test Button */}
         <View style={{ padding: 20 }}>
+        <TextInput
+          value={prompt}
+          onChangeText={setPrompt}
+          placeholder="Type your prompt here"
+          style={{
+            borderWidth: 1,
+            borderColor: "#000",
+            backgroundColor: "#fff",
+            padding: 10,
+            marginBottom: 10,
+            borderRadius: 8
+          }}
+        />
           <Button title="Send Test Prompt" onPress={testPrompt} />
-          <Text style={{ marginTop: 10 }}>Response: {response}</Text>
+          <Text style={{ marginTop: 12, padding: 10, backgroundColor: '#f2f2f2', borderRadius: 8 }}>
+  {response}
+</Text>
+
         </View>
       </NavigationContainer>
     </Provider>
