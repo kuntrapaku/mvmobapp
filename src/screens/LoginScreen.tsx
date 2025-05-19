@@ -3,7 +3,7 @@ import { View, TextInput, Button, StyleSheet, Alert, ActivityIndicator } from 'r
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
+import GradientBackground from '../components/GradientBackground';
 import { AppDispatch, RootState } from '../store/store';
 import { loginUser } from '../store/slices/authSlice';
 import { RootStackParamList } from '../navigation/types';
@@ -35,6 +35,7 @@ export default function LoginScreen() {
   };
 
   return (
+    <GradientBackground>
     <View style={styles.container}>
       <TextInput
         placeholder="Username"
@@ -56,16 +57,20 @@ export default function LoginScreen() {
         <Button title="Login" onPress={handleLogin} />
       )}
     </View>
+    </GradientBackground>
   );
 }
 
+
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', padding: 20 },
+  container: {flex:1, justifyContent: 'center', padding:20},
   input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
+    borderWidth:1,
+    borderColor: '#ccc',
     padding: 12,
-    borderRadius: 6,
     marginBottom: 10,
+    borderRadius: 6,
   },
+
+
 });

@@ -13,6 +13,8 @@ import MessagesScreen from './MessagesScreen';
 import NotificationsScreen from './NotificationsScreen';
 import { AppDispatch } from '../store/store';
 import { RootStackParamList } from '../navigation/types';
+import CreateFrameScreen from './CreateFrameScreen';
+import Frames from './Frames';
 
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Dashboard'>;
@@ -52,6 +54,9 @@ export default function DashboardScreen() {
             case 'Connections':
               iconName = 'account-multiple';
               break;
+            case 'Frames' :
+              iconName = '+'
+              break;
             case 'Messages':
               iconName = 'message-text';
               break;
@@ -67,6 +72,7 @@ export default function DashboardScreen() {
     >
       <Tab.Screen name="Feed" component={FeedScreen} />
       <Tab.Screen name="Connections" component={ConnectionsScreen} />
+      <Tab.Screen name= "Frames" component={Frames}/>
       <Tab.Screen name="Messages" component={MessagesScreen} />
       <Tab.Screen name="Notifications" component={NotificationsScreen} />
     </Tab.Navigator>
